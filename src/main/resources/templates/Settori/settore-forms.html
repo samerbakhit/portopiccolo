@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Settore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+  <div  th:replace="~{layout :: body}"></div>
+    <div class="container mt-5">
+       <h1 th:text="${#strings.isEmpty(settoreForm.idSettore) ? 'Crea Nuovo Settore' : 'Modifica Settore'}"></h1>
+
+        <form th:action="@{/settori/save}" th:object="${settoreForm}" method="post">
+        
+         <!-- Campo nascosto per l'ID -->
+		  <div class="mb-3">
+               
+                <input type="hidden" class="form-control"  id="idSettore" th:field="*{idSettore}" readonly>
+              
+            </div>
+            <!-- Nome Utente -->
+            <div class="mb-3">
+                <label for="nome" class="form-label">Settore</label>
+                <input type="text" class="form-control"  id="settore" th:field="*{settore}" placeholder="Inserisci un settore">
+                <div class="text-danger" th:if="${#fields.hasErrors('settore')}" th:errors="*{settore}"></div>
+                <!-- Mostra il messaggio di errore per il nome utente -->    
+            </div>
+            
+ 
+
+            <!-- Pulsanti -->
+            <button type="submit" class="btn btn-success">Salva</button>
+            <a href="/settori" class="btn btn-secondary">Annulla</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (opzionale) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

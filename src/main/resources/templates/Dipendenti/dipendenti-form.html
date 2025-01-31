@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Dipendente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+  <div  th:replace="~{layout :: body}"></div>
+    <div class="container mt-5">
+       <h1 th:text="${#strings.isEmpty(dipendente.codiceDipendente) ? 'Crea Nuovo Dipendente' : 'Modifica Dipendente'}"></h1>
+
+        <form th:action="@{/dipendenti/save}" th:object="${dipendente}" method="post">
+         <!-- Campo nascosto per l'ID -->
+		  <div class="mb-3">
+               
+                <input type="hidden" class="form-control"  id="codiceDipendente" th:field="${dipendente.codiceDipendente}" readonly>
+              
+            </div>
+            <!-- Nome Utente -->
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control"  id="nome" th:field="${dipendente.nome}" placeholder="Inserisci nome dipendente">
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                <!-- Mostra il messaggio di errore per il nome utente -->    
+            </div>
+             <div class="mb-3">
+                <label for="nome" class="form-label">Cognome</label>
+                <input type="text" class="form-control" id="cognome" th:field="*{cognome}" placeholder="Inserisci cognome dipendente">
+           	    <div class="text-danger" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></div>
+               
+            </div>
+             
+
+      <div class="mb-3">
+    <label for="Cittadinanza" class="col-sm-4 col-form-label">Cittadinanza</label>-
+    
+    <div class="col-sm-8">
+        <select th:field="*{Cittadinanza}"  class="form-control" id="Cittadinanza" >
+         		<option value="" selected>Seleziona un paese</option>
+         		<option th:each="paese : ${paesiList}" 
+                    th:value="${paese.idPaese}" 
+                    th:text="${paese.paese}" 
+                    th:selected="${paese.idPaese == dipendente.Cittadinanza}">
+            </option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('Cittadinanza')}" th:errors="*{Cittadinanza}"></div>
+
+    </div>
+</div>
+            
+            
+            
+                  <div class="mb-3">
+    <label for="Settore" class="col-sm-4 col-form-label">Settore</label>-
+    
+    <div class="col-sm-8">
+        <select th:field="*{settore}"  class="form-control" id="settore" >
+        
+         		<option value="" Selected>Seleziona un settore</option>
+         		<option th:each="settore : ${settoreList}" 
+                    th:value="${settore.idSettore}" 
+                    th:text="${settore.settore}" 
+                    th:selected="${settore.idSettore == dipendente.settore}">
+            </option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('settore')}" th:errors="*{settore}"></div>
+
+    </div>
+</div>
+            
+            
+            
+            
+            
+
+                  <div class="mb-3">
+                <label for="cell" class="form-label">cellulare</label>
+                <input type="text" class="form-control" id="cell" th:field="*{cell}" placeholder="Inserisci il numero di telefono">
+              <div class="text-danger" th:if="${#fields.hasErrors('cell')}" th:errors="*{cell}"></div>
+                
+            </div>
+           
+                  <div class="mb-3">
+                <label for="nome" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Inserisci l'email ">
+               <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+               
+            </div>
+            
+ 
+
+            <!-- Pulsanti -->
+            <button type="submit" class="btn btn-success">Salva</button>
+            <a href="/dipendenti" class="btn btn-secondary">Annulla</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (opzionale) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

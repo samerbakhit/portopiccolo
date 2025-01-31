@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+  <head>
+
+    <title>Dipendenti</title>
+    <style>
+        @page {
+            size: A4 landscape; /* Formato verticale portrait landscape */
+            margin: 2cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+          th {
+            border: 2px solid black;
+            padding: 8px;
+            text-align: left;
+            background-color: green;
+            color:white;
+        }
+         td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+  </head>
+  <body>
+ <h1 th:text="'Dipendenti : '+${count}"></h1>
+ <h2 th:text="'Settore : '+${settoreNome}"></h2>
+    <table  >
+      <thead>
+        <tr>
+          <th>Codice</th>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Paese</th>
+          <th>Settore</th>
+          <th>Email</th>
+          <th>Cell</th>
+   
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="dipendente : ${Lista}">
+          <td th:text="${dipendente.codiceDipendente}"></td>
+          <td th:text="${dipendente.nome}"></td>
+          <td th:text="${dipendente.cognome}"></td>
+          <td th:text="${dipendente.paese}"></td>
+          <td th:text="${dipendente.settore}"></td>
+          <td th:text="${dipendente.email}"></td>
+          <td th:text="${dipendente.cell}"></td>
+          <!-- Aggiungi eventuali azioni, per esempio un link per modificare o eliminare -->
+    
+        </tr>
+      </tbody>
+    </table>
+   
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modulo di Contatto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            width:700                                                                                                                                      0%;
+            height: 300px;
+        }
+    </style>
+</head>
+<body><div  th:replace="~{layout :: body}"></div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Modulo di Contatto</h1>
+<table >
+
+    <!-- Messaggio di successo -->
+    <div class="alert alert-success" th:if="${successMessage!=null}" th:text="${successMessage}"></div>
+
+    <!-- Modulo di contatto -->
+    <form th:action="@{/email/send}" th:object="${emailRequest}" method="post">
+       <tr><td> <div class="mb-3">
+            <label for="name" class="form-label">nome</label>
+            <input  id="name" th:field="*{name}" class="form-control" placeholder="Inserisci nome" >
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+               
+            </div>
+        </div>
+    <tr><td> <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input  id="email" th:field="*{email}" class="form-control" placeholder="Inserisci email" >
+            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+               
+            </div>
+        </div>
+        <td rowspan=6>
+        <h1>   jjjjkmkhu huih iuhi u</h1>
+    
+<div id="map"></div>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Indirizzo da geocodificare
+    const address = "Trieste, Via del Ghirlandaio 14";
+    
+    // URL dell'API di Nominatim per la geocodifica
+    const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+    // Recupera le coordinate per l'indirizzo
+    fetch(geocodeUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0) {
+                // Ottieni latitudine e longitudine
+                const lat = parseFloat(data[0].lat);
+                const lon = parseFloat(data[0].lon);
+
+                // Inizializza la mappa con le coordinate ottenute
+                const map = L.map('map').setView([lat, lon], 15);
+
+                // Aggiungi il layer di OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Aggiungi un marcatore
+                const marker = L.marker([lat, lon]).addTo(map);
+                marker.bindPopup(`${address}`).openPopup();
+            } else {
+                alert("Indirizzo non trovato!");
+            }
+        })
+        .catch(error => console.error("Errore nella geocodifica:", error));
+</script>
+       <tr><td>   <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input  id="subject" th:field="*{subject}" class="form-control" placeholder="Inserisci un soggetto" >
+            <div class="text-danger" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">
+               
+            </div>
+        </div>
+        
+
+       <tr><td> <div class="mb-3">
+            <label for="message" class="form-label">Messaggio</label>
+            <textarea id="message" th:field="*{message}" class="form-control" rows="5" placeholder="Scrivi il tuo messaggio" ></textarea>
+            <div class="text-danger" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">
+             
+            </div>
+        </div>
+
+     <tr><td>   <button type="submit" class="btn btn-primary">Invia</button>
+    </form>
+   
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
