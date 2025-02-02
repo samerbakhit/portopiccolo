@@ -26,12 +26,12 @@
        <div class="alert alert-success alert-dismissible fade show" role="alert">
    
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    <button th:onclick="|window.location.href='@{/emails}'|" type="button" class="btn btn-primary position-relative">
-        Emails
+   <a class="nav-link" th:href="@{/emails}">Emails<span class="badge text-bg-success" th:text="${emailC}" ></span></a>
+       
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" th:text="${emailC}">
            
         </span>
-    </button>
+  
 </div>
 <div >
    

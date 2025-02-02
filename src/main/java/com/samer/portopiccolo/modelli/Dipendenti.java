@@ -1,5 +1,6 @@
 package com.samer.portopiccolo.modelli;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +35,7 @@ public class Dipendenti {
 	private String cell;
 	@NotNull(message="Bisogna inserire il paese di cittadinanza")
 	private Integer Cittadinanza;
+	
 	@NotNull(message="Bisogna Inserire il settore di lavoro")
 	private Integer settore;
 	

@@ -34,7 +34,7 @@ public class EmailController {
 
    
     
-    @GetMapping("emails")
+    @GetMapping("/emails")
     public String emailsShow(Model model) {
 		Long ListaDipendenti = dvs.dipendentiConteggio();
 	    model.addAttribute("lDipendenti", ListaDipendenti);
@@ -46,7 +46,7 @@ public class EmailController {
 	    model.addAttribute("countSettore",ss.contaSettore());
 	    ArrayList<EmailRequest>ListaEmail=emailService.AllEmails();
 	    model.addAttribute("ListaEmail", ListaEmail);
-    	return ("/Emails/emails");
+    	return ("emails");
     }
     @GetMapping("/email")
     public String showContactForm(Model model) {

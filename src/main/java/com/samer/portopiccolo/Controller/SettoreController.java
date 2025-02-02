@@ -72,7 +72,7 @@ public class SettoreController {
      
         model.addAttribute("settoreForm", new Settore());
 	    model.addAttribute("settoreFiltro", new Settore());
-     return ("/Settori/settore-forms");
+     return ("Settori/settore-forms");
     }
 	 @PostMapping("/save")
 	    public String saveSettore(
