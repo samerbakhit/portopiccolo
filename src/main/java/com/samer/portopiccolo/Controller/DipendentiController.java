@@ -53,7 +53,8 @@ public class DipendentiController {
 		 model.addAttribute("countSettore",ss.contaSettore());
 		 model.addAttribute("lDipendenti", ListaDipendenti);
 		ArrayList<DipendentiView>Lista =dvs.tuttiDipendenti();
-		
+		 model.addAttribute("orderColumn", 0); // Imposta la colonna su cui ordinare (indice della colonna)
+		    model.addAttribute("orderDir", "desc");
 		model.addAttribute("Lista", Lista);
 		long count = dvs.dipendentiConteggio();
 		model.addAttribute("count", count);
@@ -106,7 +107,7 @@ public class DipendentiController {
 	        model.addAttribute("settore", new Settore()); // Inizializza il bean settore
 		    model.addAttribute("settoreList", ss.mostraSettore());
 		    model.addAttribute("settoreFiltro", new Settore());
-	     return ("/Dipendenti/dipendenti-form");
+	     return ("Dipendenti/dipendenti-form");
 	    }
 	 
 	 
